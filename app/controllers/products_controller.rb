@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 		end
 	end
 
-	def delete
+	def destroy
 	end
 
 	def in_stock
