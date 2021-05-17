@@ -27,6 +27,13 @@ class ProductsController < ApplicationController
 	end
 
 	def destroy
+    respond_to do |format|
+			if @product.destroy
+				format.json { head :no_content }
+      else
+				format.json { render json: @product.errors, status: :unprocessable_entity }
+			end
+    end
 	end
 
 	def in_stock
