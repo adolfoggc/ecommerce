@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'order/index'
-  get 'order/show'
+  get 'orders/index'
+  get 'orders/:id'
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 	post '/products', to: 'products#create'
