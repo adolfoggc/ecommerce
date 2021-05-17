@@ -1,9 +1,17 @@
 class ProductsController < ApplicationController
-
 	def show
 	end
 
 	def create
+		@product = Product.new(product_params)
+		
+		respond_to do |format|
+			if @product.save
+				format.json { render json: @product, status: :created }
+			else
+				format.json { render json: @product.errors, status: :unprocessable_entity }
+			end
+		end
 	end
 
 	def update
