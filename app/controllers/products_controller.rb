@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+	before_action :set_product, only: [:show, :update, :destroy]
+
 	def show
 	end
 
@@ -14,7 +16,14 @@ class ProductsController < ApplicationController
 		end
 	end
 
-	def update
+	def update	
+		respond_to do |format|
+			if @product.update(product_params)
+				format.json { render json: @product, status: :ok }
+			else
+				format.json { render json: @product.errors, status: :unprocessable_entity }
+			end
+		end
 	end
 
 	def delete
@@ -24,11 +33,11 @@ class ProductsController < ApplicationController
 	end
 
 	private
-		def product_params
-			params.require(:product).permit(:description, :in_stock, :bar_code, :price)
-		end
-
-		def set_product
-      @product = Product.find(params[:id])
-    end
+	def product_params
+		params.require(:product).permit(:description, :in_stock, :bar_code, :price)
+	end
+	
+	def set_product
+		@product = Product.find(params[:id])
+	end
 end
