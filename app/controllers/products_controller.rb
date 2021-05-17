@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 	def delete
 	end
 
-	def on_stock
+	def in_stock
 	end
 
 	private
