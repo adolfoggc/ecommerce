@@ -16,4 +16,13 @@ class OrderController < ApplicationController
 			end
 		end
 	end
+
+	private
+	def order_params
+		params.require(:order).permit(:number, :delivery_fee)
+	end
+
+	def set_order
+		@order = Order.find(params[:id])
+	end
 end
