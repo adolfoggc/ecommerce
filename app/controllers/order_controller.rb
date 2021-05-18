@@ -8,8 +8,6 @@ class OrderController < ApplicationController
 
   def create
 		@order = Order.new(order_params)
-		product_orders = get_product_orders
-
 
 		respond_to do |format|
 			if @order.save
