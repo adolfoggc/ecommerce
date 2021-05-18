@@ -1,4 +1,5 @@
 class OrderController < ApplicationController
+	skip_before_action :verify_authenticity_token
   def index
   end
 
@@ -19,7 +20,8 @@ class OrderController < ApplicationController
 
 	private
 	def order_params
-		params.require(:order).permit(:number, :delivery_fee)
+		params.require(:order).permit(:number, :delivery_fee,
+			product_orders_attributes: [ :product_id, :final_price, :quantity ])
 	end
 
 	def set_order
