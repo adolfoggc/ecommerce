@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_203846) do
+ActiveRecord::Schema.define(version: 2021_05_18_012908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2021_05_17_203846) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_orders", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["product_id"], name: "index_product_orders_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.text "description"
     t.integer "in_stock"
@@ -31,4 +41,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_203846) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "product_orders", "orders"
+  add_foreign_key "product_orders", "products"
 end
