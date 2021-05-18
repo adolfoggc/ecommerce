@@ -8,6 +8,8 @@ class OrderController < ApplicationController
 
   def create
 		@order = Order.new(order_params)
+		product_orders = get_product_orders
+		
 
 		respond_to do |format|
 			if @order.save
@@ -22,6 +24,10 @@ class OrderController < ApplicationController
 	def order_params
 		params.require(:order).permit(:number, :delivery_fee,
 			product_orders_attributes: [ :product_id, :final_price, :quantity ])
+	end
+
+	def get_product_orders
+		params[:order][:product_orders_attributes]
 	end
 
 	def set_order
