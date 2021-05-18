@@ -13,4 +13,12 @@ class Order < ApplicationRecord
 			po.save
 		end
 	end
+
+	def total_order_amount
+		total_order = 0
+		self.product_orders.each do |po|
+			total_order += po.order_product_price
+		end
+		return total_order
+	end
 end
