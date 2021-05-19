@@ -24,4 +24,14 @@ class ProductOrder < ApplicationRecord
     self.check_final_price
   end
 
+  def special_offer_name
+    if self.special_offer.nil?
+      return "Nenhuma"
+    elsif self.special_offer.friendly_discount?
+      return "Desconto Especial"
+    elsif self.special_offer.pay_x_get_y?
+      return "Leve X e Pague Y"
+    end
+  end
+
 end
