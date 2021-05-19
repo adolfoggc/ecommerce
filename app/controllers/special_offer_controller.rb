@@ -15,4 +15,8 @@ class SpecialOfferController < ApplicationController
 		def special_offer_params
 			params.require(:special_offer).permit(:product_id, :kind)
 		end
+
+		def set_special_offer
+			@special_offer = SpecialOffer.find(params[:id])
+		end
 end
