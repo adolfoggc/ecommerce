@@ -23,6 +23,16 @@ class SpecialOfferController < ApplicationController
 		end
 	end
 	
+	def destroy
+    respond_to do |format|
+			if @special_offer.destroy
+				format.json { head :no_content }
+      else
+				format.json { render json: @special_offer.errors, status: :unprocessable_entity }
+			end
+    end
+	end
+
 	private
 		def special_offer_params
 			params.require(:special_offer).permit(:product_id, :kind)
