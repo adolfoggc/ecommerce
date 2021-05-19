@@ -1,8 +1,7 @@
 <h1>Pedido <%= @order.number %></h1>
-
+<h2><%= "Data do Pedido: #{@order.created_at.strftime("%d/%m/%Y")}" %></h2>
 <table>
 	<tr>
-		<th>Código de Barras</th>
 		<th>Produto</th>
 		<th>Quantidade</th>
 		<th>Promoção?</th>
@@ -11,7 +10,6 @@
 	</tr>
 	<% @order.product_orders.each do |product_order| %>
 		<tr>
-			<td><%= product_order.product.bar_code %></td>
 			<td><%= product_order.product.description %></td>
 			<td><%= product_order.quantity %></td>
 			<td><%= product_order.special_offer_name %></td>
@@ -20,11 +18,11 @@
 		</tr>
 	<% end%>
 	<tr>
-		<td colspan="5">Taxa de Entrega</td>
+		<td colspan="4">Taxa de Entrega</td>
 		<td><%= @order.delivery_fee %></td>
 	</tr>
 	<tr>
-		<td colspan="5">Total</td>
+		<td colspan="4">Total</td>
 		<td><%= @order.total_order_amount %></td>
 	</tr>
 </table>
