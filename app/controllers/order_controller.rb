@@ -3,7 +3,13 @@ class OrderController < ApplicationController
 	before_action :set_order, only: [:show]
 
   def index
-		@orders = Order.all
+		if params[:order].blank?
+			@orders = Order.all
+			@order = Order.new
+		else
+			@orders = Order.where("number LIKE '%#{ order_params[:number] }%'")
+			@order = Order.new(order_params)
+		end
   end
 
   def show
