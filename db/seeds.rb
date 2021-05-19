@@ -24,14 +24,24 @@ SpecialOffer.create(kind: SpecialOffer.kinds[:friendly_discount], product_id: 5)
 
 order_quote = ["What're ya buyin?", "What're ya sellin'?"].sample
 puts order_quote
-Order.create(number: "77", delivery_fee: 6.80)
-ProductOrder.create(order_id: 1, product_id: 1, quantity: 10, special_offer_id: 1)
-ProductOrder.create(order_id: 1, product_id: 2, quantity: 10, special_offer_id: 2)
-ProductOrder.create(order_id: 1, product_id: 5, quantity: 5, special_offer_id: 5)
+delivery_fee = (500..3000).to_a
 
-Order.create(number:"88", delivery_fee: 7.0)
-ProductOrder.create(order_id: 2, product_id: 2, quantity: 10, special_offer_id: 2)
-ProductOrder.create(order_id: 2, product_id: 3, quantity: 10, special_offer_id: 3)
-ProductOrder.create(order_id: 2, product_id: 4, quantity: 10, special_offer_id: nil)
+(9*5).times do |order_number|
+	Order.create(number: (order_number+1).to_s, delivery_fee: (delivery_fee.sample/100) )
+	listed_products = []
+	5.times do |product_number|
+		product = Product.all.sample
+		unless listed_products.include?(product)
+			listed_products << product
+			if product.special_offers.blank? 
+				ProductOrder.create(order_id: order_number+1, product: product, quantity: (1..20).to_a.sample, special_offer_id: nil )
+			else
+				special_offers = product.special_offer_ids
+				special_offers << nil
+				ProductOrder.create(order_id: order_number+1, product: product, quantity: (1..20).to_a.sample, special_offer_id: special_offers.sample )
+			end
+		end
+	end
+end
 
 puts ["Heh heh heh heh... Thank you!", "Is that all, stranger?", "Come back any time..."].sample
