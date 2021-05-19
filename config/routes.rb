@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
 	post '/special_offers/', to: 'special_offer#create'
 	patch '/special_offers/:id', to: 'special_offer#update'
+	delete '/special_offers/:id', to: 'special_offer#destroy'
 end
