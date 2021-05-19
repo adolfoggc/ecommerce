@@ -2,10 +2,9 @@ class Order < ApplicationRecord
 	has_many :product_orders
 	has_many :products, through: :product_orders
 
-	after_create :create_related_product_order
-
 	attr_accessor :listed_products
-
+	after_create :create_related_product_order, unless: Proc.new { self.listed_products.nil? }
+	
 	def create_related_product_order
 		self.listed_products.each do |product_order, attributes|
 			po = ProductOrder.new(attributes)
