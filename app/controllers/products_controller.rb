@@ -37,6 +37,11 @@ class ProductsController < ApplicationController
 	end
 
 	def in_stock
+		@product = Product.where("in_stock > 0")
+
+		respond_to do |format|
+			format.json { render json: @product, status: :ok }
+		end
 	end
 
 	private
