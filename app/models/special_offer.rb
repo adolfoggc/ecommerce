@@ -11,12 +11,12 @@ class SpecialOffer < ApplicationRecord
   }
 
   def special_price quantity
-    if (self.kind == SpecialOffer.kinds[:pay_x_get_y]) && (quantity >= 3)
+    if (self.pay_x_get_y?) && (quantity >= 3)
       return self.product.price * (quantity - 1)
-    elsif self.kind == SpecialOffer.kinds[:friendly_discount]
+    elsif self.friendly_discount?
       return (self.product.price * quantity)*0.95
     else
-      return (self.product.price * quantity
+      return self.product.price * quantity
     end
   end
 end
