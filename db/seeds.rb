@@ -25,13 +25,13 @@ SpecialOffer.create(kind: SpecialOffer.kinds[:friendly_discount], product_id: 5)
 order_quote = ["What're ya buyin?", "What're ya sellin'?"].sample
 puts order_quote
 Order.create(number: "77", delivery_fee: 6.80)
-ProductOrder.create(order_id: 1, product_id: 1, quantity: 10, special_offer_id: nil)
+ProductOrder.create(order_id: 1, product_id: 1, quantity: 10, special_offer_id: 1)
 ProductOrder.create(order_id: 1, product_id: 2, quantity: 10, special_offer_id: 2)
 ProductOrder.create(order_id: 1, product_id: 5, quantity: 5, special_offer_id: 5)
 
 Order.create(number:"88", delivery_fee: 7.0)
 ProductOrder.create(order_id: 2, product_id: 2, quantity: 10, special_offer_id: 2)
-ProductOrder.create(order_id: 2, product_id: 3, quantity: 10, special_offer_id: 4)
+ProductOrder.create(order_id: 2, product_id: 3, quantity: 10, special_offer_id: 3)
 ProductOrder.create(order_id: 2, product_id: 4, quantity: 10, special_offer_id: nil)
 
 puts ["Heh heh heh heh... Thank you!", "Is that all, stranger?", "Come back any time..."].sample
