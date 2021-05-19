@@ -1,5 +1,7 @@
 class OrderController < ApplicationController
 	skip_before_action :verify_authenticity_token
+	before_action :set_order, only: [:show]
+
   def index
 		@orders = Order.all
   end
