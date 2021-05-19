@@ -7,8 +7,8 @@ class OrderController < ApplicationController
 			@orders = Order.all
 			@order = Order.new
 		else
-			@orders = Order.where("number LIKE '%#{ order_params[:number] }%'")
 			@order = Order.new(order_params)
+			@orders = Order.where("number LIKE '%#{ order_params[:number] }%'").offset(@order.offset)
 		end
   end
 
@@ -29,7 +29,7 @@ class OrderController < ApplicationController
 
 	private
 	def order_params
-		params.require(:order).permit(:number, :delivery_fee,
+		params.require(:order).permit(:number, :delivery_fee, :offset,
 			listed_products: [ :product_id, :final_price, :quantity ])
 	end
 
