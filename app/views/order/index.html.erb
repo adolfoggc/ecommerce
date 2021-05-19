@@ -1,6 +1,7 @@
 <h1>Listagem de Pedidos</h1>
 <%= form_for @order, as: :order, url: orders_index_path(@order), method: :get do |f| %>
 	<%= search_field_tag 'order[number]', @order.number.nil? ? 'Pesquisar por código' : @order.number %>
+	<%= f.hidden_field :offset, value: 0 %>
 	<%= f.submit 'Pesquisar'%>
 <% end %>
 
@@ -39,5 +40,22 @@
 			</tr>
 		</table>
 		<hr>
+	<% end %>
+<% end %>
+<%= "offset #{@order.offset}" %>
+<%= "number #{@order.number}" %>
+<% if @total_paginations > 0 %>
+	
+	<% order = @order %>
+	<% if order.offset.to_i > 0 %>
+		<% order.offset = order.offset.to_i - 1 %>
+		<%= link_to '<<', orders_index_path(@order) %>
+		<%= orders_index_path(@order) %>
+	<% end %>
+	<%= "#{ @order.offset.to_i + 1} de #{ @total_paginations }" %> 
+	<% if order.offset.to_i < (@total_paginations - 1) %>
+		<% order.offset = order.offset.to_i + 1 %>
+		<%= link_to '>>', orders_index_path(@order) %>
+		<%= orders_index_path(@order) %>
 	<% end %>
 <% end %>

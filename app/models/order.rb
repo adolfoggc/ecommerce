@@ -4,6 +4,7 @@ class Order < ApplicationRecord
 	validates :number, presence: :true, uniqueness: true
 
 	attr_accessor :listed_products
+	attr_accessor :offset
 	after_create :create_related_product_order, unless: Proc.new { self.listed_products.nil? }
 
 	def create_related_product_order
