@@ -8,8 +8,11 @@ class OrderController < ApplicationController
 			@order = Order.new
 		else
 			@order = Order.new(order_params)
-			@orders = Order.where("number LIKE '%#{ order_params[:number] }%'").offset(@order.offset)
+			@orders = Order.where("number LIKE '%#{ order_params[:number] }%'")
 		end
+		@total_paginations = @orders.count/5
+		@total_paginations += 1 if @orders.count%5 > 0
+		@orders = @orders.offset(@order.offset.to_i * 5).limit(5)
   end
 
   def show

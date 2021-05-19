@@ -42,20 +42,22 @@
 		<hr>
 	<% end %>
 <% end %>
-<%= "offset #{@order.offset}" %>
-<%= "number #{@order.number}" %>
-<% if @total_paginations > 0 %>
-	
+<% if @total_paginations > 1 %>
 	<% order = @order %>
+	<% hash = Hash.new%>
 	<% if order.offset.to_i > 0 %>
-		<% order.offset = order.offset.to_i - 1 %>
-		<%= link_to '<<', orders_index_path(@order) %>
-		<%= orders_index_path(@order) %>
+		<%= form_for @order, as: :order, url: orders_index_path(@order), method: :get do |f| %>
+			<%= f.hidden_field :number, value: @order.number %>
+			<%= f.hidden_field :offset, value: (@order.offset.to_i - 1) %>
+			<%= f.submit '<<'%>
+		<% end %>
 	<% end %>
 	<%= "#{ @order.offset.to_i + 1} de #{ @total_paginations }" %> 
 	<% if order.offset.to_i < (@total_paginations - 1) %>
-		<% order.offset = order.offset.to_i + 1 %>
-		<%= link_to '>>', orders_index_path(@order) %>
-		<%= orders_index_path(@order) %>
+		<%= form_for @order, as: :order, url: orders_index_path(@order), method: :get do |f| %>
+			<%= f.hidden_field :number, value: @order.number %>
+			<%= f.hidden_field :offset, value: (@order.offset.to_i + 1) %>
+			<%= f.submit '>>'%>
+		<% end %>
 	<% end %>
 <% end %>
