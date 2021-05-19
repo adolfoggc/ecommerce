@@ -1,4 +1,6 @@
 class SpecialOfferController < ApplicationController
+	before_action :set_special_offer, only: [:update]
+
 	def create
 		@special_offer = SpecialOffer.new(special_offer_params)
 		
