@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 	post '/products', to: 'products#create'
   post '/products/edit', to: 'products#update'
   delete '/products/:id', to: 'products#destroy'
+
+	post '/special_offers/', to: 'special_offer#create'
 end
