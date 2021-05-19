@@ -12,6 +12,16 @@ class SpecialOfferController < ApplicationController
 			end
 		end
 	end
+
+	def update	
+		respond_to do |format|
+			if @special_offer.update(special_offer_params)
+				format.json { render json: @special_offer, status: :ok }
+			else
+				format.json { render json: @special_offer.errors, status: :unprocessable_entity }
+			end
+		end
+	end
 	
 	private
 		def special_offer_params
