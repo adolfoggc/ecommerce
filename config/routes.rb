@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   delete '/products/:id', to: 'products#destroy'
 
 	post '/special_offers/', to: 'special_offer#create'
+	patch '/special_offers/:id', to: 'special_offers#update'
 end
