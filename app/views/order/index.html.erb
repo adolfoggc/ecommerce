@@ -1,6 +1,6 @@
 <h1>Listagem de Pedidos</h1>
 <%= form_for @order, as: :order, url: orders_index_path(@order), method: :get do |f| %>
-	<%= search_field_tag 'order[number]', 'Pesquisar por código' %>
+	<%= search_field_tag 'order[number]', @order.number.nil? ? 'Pesquisar por código' : @order.number %>
 	<%= f.submit 'Pesquisar'%>
 <% end %>
 
