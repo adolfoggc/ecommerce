@@ -6,7 +6,7 @@ class ProductOrder < ApplicationRecord
 
   def order_product_price()
     if self.special_offer.nil?
-      price = self.product.price * self.quantity
+      price = self.normal_price
     else
       price = self.special_offer.special_price( self.quantity)
     end
