@@ -1,4 +1,5 @@
 class SpecialOfferController < ApplicationController
+	skip_before_action :verify_authenticity_token
 	before_action :set_special_offer, only: [:update, :destroy]
 
 	def create
